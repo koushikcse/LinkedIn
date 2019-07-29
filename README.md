@@ -8,16 +8,19 @@ Android LinkedIn login integration to get user lite profile with email and post 
 Add this to your project level `build.gradle` file
 
 ```gradle
-repositories {
-    maven { url "https://jitpack.io" }
-}
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 And then add this to your module level `build.gradle` file
 
 ```gradle
 dependencies {
-    implementation "com.github.koushikcse:Android-LinkedIn-Login-Post-Integration:${latest-version}"
+    implementation "com.github.koushikcse:LinkedIn:${latest-version}"
 }
 ```
 ## How it works
