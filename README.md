@@ -3,7 +3,7 @@ Android LinkedIn login integration to get user lite profile with email and post 
 
 [![](https://jitpack.io/v/koushikcse/LinkedIn.svg)](https://jitpack.io/#koushikcse/LinkedIn)
 
-![LinkedIn Integration demo](https://github.com/koushikcse/LinkedIn/blob/master/demo.mp4)
+![LinkedIn Integration demo](https://github.com/koushikcse/LinkedIn/blob/master/linkedindemo.gif)
 
 ## Add to Gradle
 
