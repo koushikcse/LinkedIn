@@ -34,6 +34,7 @@ class LinkedinSignInActivity : Activity() {
     private var redirectUri: String? = null
     private var state: String? = null
     private var scopes: List<String>? = null
+    private var isLogedIn = true
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -182,21 +183,25 @@ class LinkedinSignInActivity : Activity() {
                 conn.disconnect()
                 if (response.has("access_token")) {
                     finish()
-                    runOnUiThread {
-                        val restService = Linkedin.linkedinLoginListener?.let {
-                            ProfileRestService(
-                                LinkedinToken(response.getString("access_token"), response.getLong("expires_in")),
-                                it
-                            )
+                    if (isLogedIn) {
+                        runOnUiThread {
+                            val restService = Linkedin.linkedinLoginListener?.let {
+                                ProfileRestService(
+                                    LinkedinToken(response.getString("access_token"), response.getLong("expires_in")),
+                                    it
+                                )
+                            }
+                            restService?.getLinkedInProfile()
                         }
-                        restService?.getLinkedInProfile()
-                    }
-                } else {
-                    finish()
-                    runOnUiThread {
-                        Linkedin.linkedinLoginListener?.failedLinkedinLogin(response.getString("error_description"))
+                        isLogedIn = false
                     }
                 }
+//                else {
+//                    finish()
+//                    runOnUiThread {
+//                        Linkedin.linkedinLoginListener?.failedLinkedinLogin(response.getString("error_description"))
+//                    }
+//                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
